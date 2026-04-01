@@ -7,9 +7,24 @@
 
 ## 🚀 快速安装
 
+### 方式一：npm 安装（推荐）⭐
+
+```bash
+# 安装到当前项目的 .qwen/skills 目录
+npx qwen-dev-skills
+
+# 或全局安装到 ~/.qwen/skills
+npx qwen-dev-skills -g
+
+# 或安装到指定路径
+npx qwen-dev-skills -p /path/to/project
+```
+
+### 方式二：git 克隆
+
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/qwen-dev-skills.git
+git clone https://github.com/zhangxudong-g/qwen-dev-skills.git
 cd qwen-dev-skills
 
 # 运行安装脚本
@@ -50,11 +65,22 @@ chmod +x install.sh
 ./install.sh
 ```
 
-#### 手动安装
+### 方式三：手动安装
+
 ```bash
 # 复制到 Qwen Code 技能目录
 cp -r skills/* ~/.qwen/skills/qwen-dev-skills/
 # Windows: copy -r skills\* $HOME\.qwen\skills\qwen-dev-skills\
+```
+
+### 方式四：npm 包安装
+
+```bash
+# 作为依赖安装（会自动复制到 .qwen/skills）
+npm install qwen-dev-skills
+
+# 或全局安装
+npm install -g qwen-dev-skills
 ```
 
 ### 2. 验证加载

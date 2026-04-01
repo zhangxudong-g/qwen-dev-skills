@@ -1,0 +1,39 @@
+{
+  "name": "qwen-dev-skills",
+  "version": "1.0.0",
+  "description": "Qwen Code CLI 开发技能包 - 将最佳实践封装为可复用的 AI 技能",
+  "main": "index.js",
+  "bin": {
+    "qwen-dev-skills": "./bin/install.js"
+  },
+  "scripts": {
+    "install": "node ./bin/install.js",
+    "postinstall": "node ./bin/postinstall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangxudong-g/qwen-dev-skills.git"
+  },
+  "keywords": [
+    "qwen",
+    "qwen-code",
+    "ai",
+    "skills",
+    "dev-tools"
+  ],
+  "author": "zhangxudong-g",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhangxudong-g/qwen-dev-skills/issues"
+  },
+  "homepage": "https://github.com/zhangxudong-g/qwen-dev-skills#readme",
+  "files": [
+    "skills/**/*",
+    "bin/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

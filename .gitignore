@@ -12,6 +12,7 @@ Thumbs.db
 
 # 忽略 node_modules (如果有)
 node_modules/
+.qwen/
 
 # 忽略构建输出
 dist/
