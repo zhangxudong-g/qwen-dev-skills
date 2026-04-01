@@ -22,15 +22,17 @@ npx qwen-dev-skills -p /path/to/project
 
 > ⚠️ 如果提示包未找到，请先发布到 npm 或使用以下方式安装。
 
-### 方式零：Git URL 安装（无需发布）
+### 方式零：Git 一键安装（无需 npm 发布）⭐
 
 ```bash
-# 使用 npx + git URL 直接安装
-npx github:zhangxudong-g/qwen-dev-skills
+# Windows (PowerShell) - 推荐
+git clone https://github.com/zhangxudong-g/qwen-dev-skills.git .qwen-tmp && node .qwen-tmp/bin/install.js && rmdir /s /q .qwen-tmp
 
-# 或使用 git 协议
-npx git+https://github.com/zhangxudong-g/qwen-dev-skills.git
+# Linux / macOS
+git clone https://github.com/zhangxudong-g/qwen-dev-skills.git .qwen-tmp && node .qwen-tmp/bin/install.js && rm -rf .qwen-tmp
 ```
+
+这会在当前目录创建 `.qwen/skills/qwen-dev-skills` 并安装所有技能。
 
 ### 方式二：git 克隆
 
