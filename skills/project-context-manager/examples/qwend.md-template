@@ -1,0 +1,192 @@
+# QWEN.md 模板 - 项目规范配置
+
+```markdown
+# 项目名称：[你的项目名]
+
+## 🎯 项目概述
+[一句话描述项目目标和核心价值]
+
+## 🛠️ 技术栈
+
+### 前端
+- **框架**: React 18 + Next.js 14
+- **语言**: TypeScript 5.x (严格模式)
+- **样式**: Tailwind CSS + shadcn/ui
+- **状态管理**: Zustand / React Context
+
+### 后端
+- **运行时**: Node.js 20+
+- **框架**: Express / Fastify
+- **数据库**: PostgreSQL 15+
+- **ORM**: Prisma
+
+### 开发工具
+- **测试**: Vitest (单元) + Playwright (E2E)
+- **Lint**: ESLint + Prettier
+- **构建**: Turbopack
+
+## 📋 编码规范
+
+### TypeScript 规则
+- ✅ 启用严格模式 (`strict: true`)
+- ❌ 禁止使用 `any`，使用 `unknown` + 类型守卫
+- ✅ 所有函数必须有返回类型注解
+- ✅ 异步函数必须处理错误 (try/catch 或返回 Promise)
+
+### 代码风格
+- 缩进：2 空格
+- 字符串：单引号优先
+- 命名：
+  - 文件/目录：kebab-case (`user-service.ts`)
+  - 类/组件：PascalCase (`UserProfile.tsx`)
+  - 函数/变量：camelCase (`getUserById`)
+  - 常量：UPPER_SNAKE_CASE (`MAX_RETRY_COUNT`)
+
+### 文件组织
+```
+src/
+├── components/     # 可复用 UI 组件
+├── features/       # 功能模块 (按业务域划分)
+├── lib/           # 工具库/第三方封装
+├── hooks/         # 自定义 Hooks
+├── types/         # TypeScript 类型定义
+└── styles/        # 全局样式
+```
+
+## 🔐 安全策略
+
+### 认证与授权
+- 密码存储：bcrypt (cost = 12)
+- JWT 有效期：15 分钟 (access) / 7 天 (refresh)
+- 双因素认证：管理员强制开启
+
+### 数据保护
+- 敏感配置：必须使用环境变量
+- 日志脱敏：邮箱/手机号/身份证自动脱敏
+- 传输加密：全站 HTTPS
+
+### 输入验证
+- 所有外部输入必须验证 (类型 + 长度 + 格式)
+- SQL 查询必须参数化
+- 文件上传限制类型 + 大小
+
+## 🧪 测试要求
+
+### 覆盖率目标
+| 类型 | 覆盖率要求 |
+|------|-----------|
+| 核心业务逻辑 | ≥ 80% |
+| 安全相关代码 | 100% |
+| API 端点 | ≥ 70% |
+
+### 测试规范
+- 单元测试：Vitest，文件名 `*.test.ts`
+- 集成测试：Playwright，目录 `e2e/`
+- 测试数据：使用工厂模式，目录 `tests/factories/`
+
+## 📦 依赖管理
+
+### 依赖添加原则
+- 优先使用标准库/已有依赖
+- 新依赖需评估：活跃度、安全性、包大小
+- 禁止左侧依赖（开发依赖不放入生产依赖）
+
+### 版本管理
+- 使用精确版本号（禁止 `^` `~`）
+- 定期更新（每月一次小版本，每季度一次大版本）
+
+## 🚀 部署规范
+
+### 环境配置
+- 开发环境：`npm run dev`
+- 测试环境：`npm run build && npm run test:e2e`
+- 生产环境：Docker 容器化部署
+
+### 发布流程
+1. 创建 Release Branch
+2. 运行完整测试套件
+3. 生成 Changelog
+4. Tag 发布
+
+## 📝 Git 规范
+
+### 提交信息格式
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Type 类型
+- `feat`: 新功能
+- `fix`: Bug 修复
+- `docs`: 文档更新
+- `style`: 代码格式（不影响逻辑）
+- `refactor`: 重构
+- `test`: 测试相关
+- `chore`: 构建/工具/配置
+
+### 示例
+```
+feat(auth): 添加双因素认证
+
+- 实现 TOTP 生成和验证
+- 添加备份码功能
+- 更新相关文档
+
+Closes #123
+```
+```
+
+## 项目配置文件示例
+
+### tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/", "next-env.d.ts"],
+  "exclude": ["node_modules/"]
+}
+```
+
+### package.json 脚本
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint src/ --ext .ts,.tsx",
+    "lint:fix": "eslint src/ --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/"
+  }
+}
+```

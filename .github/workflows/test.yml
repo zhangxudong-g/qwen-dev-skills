@@ -1,0 +1,51 @@
+name: Test Skills
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate SKILL.md files
+        run: |
+          echo "Validating skill definitions..."
+          for file in skills/*/SKILL.md; do
+            echo "Checking $file"
+            if ! grep -q "^name:" "$file"; then
+              echo "❌ Missing 'name:' in $file"
+              exit 1
+            fi
+            if ! grep -q "^description:" "$file"; then
+              echo "❌ Missing 'description:' in $file"
+              exit 1
+            fi
+          done
+          echo "✅ All skill files are valid"
+
+      - name: Check required files
+        run: |
+          echo "Checking required files..."
+          required_files=(
+            "README.md"
+            "LICENSE"
+            "evals/evals.json"
+          )
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Missing required file: $file"
+              exit 1
+            fi
+          done
+          echo "✅ All required files present"
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON files..."
+          python3 -m json.tool evals/evals.json > /dev/null || exit 1
+          echo "✅ All JSON files are valid"

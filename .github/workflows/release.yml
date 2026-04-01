@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            README.md
+            LICENSE
+          generate_release_notes: true
+          body: |
+            ## 📦 安装方式
+            
+            ### 方式 1: 克隆仓库
+            ```bash
+            git clone https://github.com/OWNER/qwen-dev-skills.git
+            cd qwen-dev-skills
+            ./install.sh
+            ```
+            
+            ### 方式 2: 下载 ZIP
+            1. 下载本 Release 的源码包
+            2. 解压后运行安装脚本
+            
+            ## 📋 更新日志
+            详见 [CHANGELOG](CHANGELOG.md)

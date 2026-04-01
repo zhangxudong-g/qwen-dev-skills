@@ -1,0 +1,150 @@
+{
+  "package": "qwen-dev-skills",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "skill": "secure-coding-checklist",
+      "cases": [
+        {
+          "id": "sec-001",
+          "prompt": "实现用户登录接口，需要邮箱和密码",
+          "expected": [
+            "参数化查询或防 SQL 注入措施",
+            "密码加密处理 (bcrypt/argon2)",
+            "输入验证逻辑",
+            "不记录明文密码到日志"
+          ],
+          "files": ["src/auth/login.ts"]
+        },
+        {
+          "id": "sec-002",
+          "prompt": "创建一个文件上传功能",
+          "expected": [
+            "文件类型验证 (MIME/扩展名)",
+            "文件大小限制",
+            "文件名安全处理",
+            "存储路径隔离"
+          ],
+          "files": ["src/api/upload.ts"]
+        }
+      ]
+    },
+    {
+      "skill": "test-driven-development",
+      "cases": [
+        {
+          "id": "tdd-001",
+          "prompt": "用 TDD 实现密码强度校验",
+          "expected": [
+            "先生成测试用例",
+            "测试覆盖边界条件",
+            "实现最小功能代码",
+            "运行测试验证"
+          ],
+          "files": ["src/utils/password-validator.ts", "tests/password-validator.test.ts"]
+        },
+        {
+          "id": "tdd-002",
+          "prompt": "测试驱动开发一个邮箱验证函数",
+          "expected": [
+            "定义测试场景 (有效/无效邮箱)",
+            "编写失败测试",
+            "实现验证逻辑",
+            "验证测试通过"
+          ],
+          "files": ["src/utils/email-validator.ts", "tests/email-validator.test.ts"]
+        }
+      ]
+    },
+    {
+      "skill": "code-review-automation",
+      "cases": [
+        {
+          "id": "review-001",
+          "prompt": "审查这段代码：@src/api/user.ts",
+          "expected": [
+            "结构化输出 (表格/分级)",
+            "安全风险识别 (如注入/权限)",
+            "具体修复建议 + 代码示例",
+            "明确结论 (通过/需修改)"
+          ],
+          "files": ["src/api/user.ts"]
+        },
+        {
+          "id": "review-002",
+          "prompt": "帮我看下这个登录实现有没有问题",
+          "expected": [
+            "识别至少 3 个检查维度",
+            "优先级分级 (Critical/Warning/Info)",
+            "指出做得好的地方",
+            "给出下一步建议"
+          ],
+          "files": ["src/auth/login.ts"]
+        }
+      ]
+    },
+    {
+      "skill": "iterative-dev-loop",
+      "cases": [
+        {
+          "id": "iter-001",
+          "prompt": "用迭代方式开发用户资料更新功能",
+          "expected": [
+            "创建任务清单 (TodoWrite)",
+            "小步实现 (≤100 行代码)",
+            "验证步骤 (测试/类型检查)",
+            "文档更新"
+          ],
+          "files": ["src/api/users.ts"]
+        },
+        {
+          "id": "iter-002",
+          "prompt": "帮我规划并实现评论功能",
+          "expected": [
+            "需求拆解为多个子任务",
+            "明确验收标准",
+            "逐步实现并验证",
+            "输出迭代反馈"
+          ],
+          "files": ["src/features/comments/"]
+        }
+      ]
+    },
+    {
+      "skill": "project-context-manager",
+      "cases": [
+        {
+          "id": "ctx-001",
+          "prompt": "开始新项目，开发一个博客系统",
+          "expected": [
+            "推荐完整技术栈",
+            "创建项目骨架命令",
+            "初始化项目规范 (QWEN.md)",
+            "给出下一步建议"
+          ],
+          "files": ["QWEN.md", "package.json"]
+        },
+        {
+          "id": "ctx-002",
+          "prompt": "这个项目使用了什么框架？",
+          "expected": [
+            "识别 package.json 中的依赖",
+            "说明技术栈组成",
+            "加载相关配置文件",
+            "输出项目结构摘要"
+          ],
+          "files": ["package.json", "tsconfig.json"]
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "pass_threshold": 0.8,
+    "criteria": {
+      "completeness": "是否包含所有 expected 项",
+      "accuracy": "输出内容是否准确相关",
+      "format": "是否符合指定输出格式",
+      "actionability": "建议是否可执行"
+    }
+  }
+}
