@@ -1,0 +1,10 @@
+.qwen/
+node_modules/
+.git/
+.github/
+*.md
+!README.md
+LICENSE
+install.sh
+install.ps1
+evals/

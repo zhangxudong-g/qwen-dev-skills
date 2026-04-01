@@ -20,6 +20,18 @@ npx qwen-dev-skills -g
 npx qwen-dev-skills -p /path/to/project
 ```
 
+> ⚠️ 如果提示包未找到，请先发布到 npm 或使用以下方式安装。
+
+### 方式零：Git URL 安装（无需发布）
+
+```bash
+# 使用 npx + git URL 直接安装
+npx github:zhangxudong-g/qwen-dev-skills
+
+# 或使用 git 协议
+npx git+https://github.com/zhangxudong-g/qwen-dev-skills.git
+```
+
 ### 方式二：git 克隆
 
 ```bash
